@@ -1,0 +1,396 @@
+TASK 1:
+import java.util.Scanner;
+
+public class arrayanalyzer {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter the number of elements (N): ");
+        int n = scanner.nextInt();
+
+        int[] arr = new int[n];
+
+        // Input numbers
+        System.out.println("Enter " + n + " numbers:");
+        for (int i = 0; i < n; i++) {
+            arr[i] = scanner.nextInt();
+        }
+
+        int sum = 0;
+        int min = arr[0];
+        int max = arr[0];
+        int evenCount = 0;
+        int oddCount = 0;
+
+        // Analyze array
+        for (int num : arr) {
+            sum += num;
+
+            if (num < min) {
+                min = num;
+            }
+            if (num > max) {
+                max = num;
+            }
+
+            if (num % 2 == 0) {
+                evenCount++;
+            } else {
+                oddCount++;
+            }
+        }
+
+        double average = (double) sum / n;
+
+        // Print results
+        System.out.println("Sum: " + sum);
+        System.out.println("Average: " + average);
+        System.out.println("Minimum: " + min);
+        System.out.println("Maximum: " + max);
+        System.out.println("Even count: " + evenCount);
+        System.out.println("Odd count: " + oddCount);
+
+        // Print array in reverse
+        System.out.print("Array in reverse order: ");
+        for (int i = n - 1; i >= 0; i--) {
+            System.out.print(arr[i] + " ");
+        }
+
+        scanner.close();
+    }
+}
+task 2:
+import java.util.Scanner;
+
+public class studentgradecalculator {
+    public static void main(String[] args) {
+       
+        Scanner input = new Scanner(System.in);
+
+        
+        System.out.print("Enter Quiz Marks (out of 15): ");
+        int quiz = input.nextInt();
+
+        System.out.print("Enter Assignment Marks (out of 10): ");
+        int assignment = input.nextInt();
+
+        System.out.print("Enter Mid-Term Marks (out of 25): ");
+        int midterm = input.nextInt();
+
+        System.out.print("Enter Final Exam Marks (out of 50): ");
+        int finalExam = input.nextInt();
+
+       
+        int total = quiz + assignment + midterm + finalExam;
+
+        
+        double average = (double) total;
+
+        
+        System.out.println("Total Marks = " + total);
+        System.out.println("Average = " + average);
+
+        
+        if (average >= 85) {
+            System.out.println("Grade = A");
+        } else if (average >= 70) {
+            System.out.println("Grade = B");
+        } else if (average >= 50) {
+            System.out.println("Grade = C");
+        } else {
+            System.out.println("Grade = Fail");
+        }
+
+        input.close(); 
+    }
+}
+
+
+task 3:
+import java.util.Scanner;
+
+public class atmmachine {
+
+    private static int balance = 0;
+    private static final int PIN = 1234;
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        boolean authenticated = false;
+
+        // 🔐 PIN Authentication with 3 attempts
+        for (int attempts = 3; attempts > 0; attempts--) {
+            System.out.print("Enter PIN: ");
+            int enteredPin = scanner.nextInt();
+
+            if (enteredPin == PIN) {
+                System.out.println("Login successful!");
+                authenticated = true;
+                break;
+            } else {
+                System.out.println("Wrong PIN! Attempts left: " + (attempts - 1));
+            }
+        }
+
+        if (!authenticated) {
+            System.out.println("Account locked due to multiple failed attempts.");
+            return;
+        }
+
+        // 🧾 ATM Menu Loop
+        while (true) {
+            System.out.println("\n==== ATM Menu ====");
+            System.out.println("1) Deposit");
+            System.out.println("2) Withdraw");
+            System.out.println("3) Check Balance");
+            System.out.println("4) Exit");
+            System.out.print("Choice: ");
+            int choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter amount to deposit: ");
+                    int depositAmount = scanner.nextInt();
+                    deposit(depositAmount);
+                    break;
+
+                case 2:
+                    System.out.print("Enter amount to withdraw: ");
+                    int withdrawAmount = scanner.nextInt();
+                    withdraw(withdrawAmount);
+                    break;
+
+                case 3:
+                    checkBalance();
+                    break;
+
+                case 4:
+                    System.out.println("Thank you for using the ATM. Goodbye!");
+                    break;
+
+                default:
+                    System.out.println("Invalid option! Try again.");
+                    continue;
+            }
+
+            if (choice == 4) break;
+        }
+
+        scanner.close();
+    }
+
+    // 💰 Deposit Method
+    public static void deposit(int amount) {
+        if (amount <= 0) {
+            System.out.println("Invalid amount! Try again.");
+            return;
+        }
+        balance += amount;
+        System.out.println("Deposit successful.");
+    }
+
+    // 💸 Withdraw Method
+    public static void withdraw(int amount) {
+        if (amount <= 0) {
+            System.out.println("Invalid amount! Try again.");
+        } else if (amount > balance) {
+            System.out.println("Insufficient balance!");
+        } else {
+            balance -= amount;
+            System.out.println("Withdrawal successful.");
+        }
+    }
+
+    // 📊 Check Balance Method
+    public static void checkBalance() {
+        System.out.println("Your balance is: " + balance);
+    }
+}
+
+task 4:
+public class areacal
+{
+
+    // Method to calculate area of a circle
+    public double area(double radius) {
+        return Math.PI * radius * radius;
+    }
+
+    // Method to calculate area of a rectangle
+    public double area(double length, double width) {
+        return length * width;
+    }
+
+    // Method to calculate area of a square
+    public double areaSquare(double side) {
+        return side * side;
+    }
+
+    public static void main(String[] args) {
+       areacal calc = new areacal();
+
+        // Sample usage
+        System.out.println("Area of Circle (radius 5): " + calc.area(5));
+        System.out.println("Area of Rectangle (length 4, width 6): " + calc.area(4, 6));
+        System.out.println("Area of Square (side 3): " + calc.areaSquare(3));
+    }
+}
+
+task 5:
+import java.util.Scanner;
+
+public class utilitymethodpack {
+
+    // Method to add two integers
+    public static int add(int a, int b) {
+        return a + b;
+    }
+
+    // Method to subtract two integers
+    public static int subtract(int a, int b) {
+        return a - b;
+    }
+
+    // Method to multiply two integers
+    public static long multiply(int a, int b) {
+        return (long) a * b;
+    }
+
+    // Method to divide two integers with divide-by-zero check
+    public static double divide(int a, int b) {
+        if (b == 0) {
+            System.out.println("Error: Cannot divide by zero.");
+            return Double.NaN;
+        }
+        return (double) a / b;
+    }
+
+    // Method to find the maximum of three integers
+    public static int maxofThree(int a, int b, int c) {
+        return Math.max(a, Math.max(b, c));
+    }
+
+    // Method to check if a number is prime
+    public static boolean isPrime(int n) {
+        if (n <= 1) return false;
+        for (int i = 2; i <= Math.sqrt(n); i++) {
+            if (n % i == 0) return false;
+        }
+        return true;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Demonstrate add
+        System.out.print("Enter two numbers to add: ");
+        int a1 = scanner.nextInt();
+        int b1 = scanner.nextInt();
+        System.out.println("Sum: " + add(a1, b1));
+
+        // Demonstrate subtract
+        System.out.print("Enter two numbers to subtract: ");
+        int a2 = scanner.nextInt();
+        int b2 = scanner.nextInt();
+        System.out.println("Difference: " + subtract(a2, b2));
+
+        // Demonstrate multiply
+        System.out.print("Enter two numbers to multiply: ");
+        int a3 = scanner.nextInt();
+        int b3 = scanner.nextInt();
+        System.out.println("Product: " + multiply(a3, b3));
+
+        // Demonstrate divide
+        System.out.print("Enter two numbers to divide: ");
+        int a4 = scanner.nextInt();
+        int b4 = scanner.nextInt();
+        double result = divide(a4, b4);
+        if (!Double.isNaN(result)) {
+            System.out.println("Quotient: " + result);
+        }
+
+        // Demonstrate maxofThree
+        System.out.print("Enter three numbers to find the maximum: ");
+        int a5 = scanner.nextInt();
+        int b5 = scanner.nextInt();
+        int c5 = scanner.nextInt();
+        System.out.println("Maximum: " + maxofThree(a5, b5, c5));
+
+        // Demonstrate isPrime
+        System.out.print("Enter a number to check if it's prime: ");
+        int n = scanner.nextInt();
+        System.out.println(n + " is prime? " + isPrime(n));
+
+        scanner.close();
+    }
+}
+task 6:
+
+import java.util.Scanner;
+
+public class pizzabillingsystem {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int basePrice = 0;
+        String size = "";
+
+       
+        while (true) {
+            System.out.print("Enter pizza size (small, medium, large): ");
+            size = scanner.nextLine().toLowerCase();
+
+            if (size.equals("small")) {
+                basePrice = 100;
+                break;
+            } else if (size.equals("medium")) {
+                basePrice = 200;
+                break;
+            } else if (size.equals("large")) {
+                basePrice = 300;
+                break;
+            } else {
+                System.out.println("Invalid! Try again.");
+                continue;
+            }
+        }
+
+        // Ask about pepperoni and validate
+        while (true) {
+            System.out.print("Do you want pepperoni? (yes/no): ");
+            String pepperoni = scanner.nextLine().toLowerCase();
+
+            if (pepperoni.equals("yes")) {
+                if (size.equals("small")) {
+                    basePrice += 30;
+                } else {
+                    basePrice += 50;
+                }
+                break;
+            } else if (pepperoni.equals("no")) {
+                break;
+            } else {
+                System.out.println("Invalid! Try again.");
+                continue;
+            }
+        }
+
+     
+        while (true) {
+            System.out.print("Do you want extra cheese? (yes/no): ");
+            String cheese = scanner.nextLine().toLowerCase();
+
+            if (cheese.equals("yes")) {
+                basePrice += 20;
+                break;
+            } else if (cheese.equals("no")) {
+                break;
+            } else {
+                System.out.println("Invalid! Try again.");
+                continue;
+            }
+        }
+
+        System.out.println("Your final bill is: " + basePrice + " rupees");
+        scanner.close();
+    }
+}
